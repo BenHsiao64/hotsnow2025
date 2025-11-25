@@ -21,6 +21,7 @@
             --glass-border: rgba(255, 255, 255, 0.2);
             --font-serif: 'Noto Serif TC', serif;
             --font-sans: 'Inter', 'Noto Sans TC', sans-serif;
+            --nav-height: 80px; /* 定義導覽列高度 */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,8 +31,8 @@
             color: var(--text-dark);
             background-color: var(--ice-white);
             line-height: 1.7;
-            overflow-x: hidden; /* 防止手機橫向滑動 */
-            -webkit-font-smoothing: antialiased; /* 讓字體在 iPhone 上更滑順 */
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         a { text-decoration: none; color: inherit; }
@@ -39,33 +40,41 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1.5rem; /* 手機版預設間距較小 */
+            padding: 0 1.5rem;
         }
 
-        /* --- 2. 質感導覽列 (含手機漢堡選單) --- */
+        /* --- 2. 質感導覽列 (圖片 Logo 優化版) --- */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            height: 70px;
+            height: var(--nav-height);
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 1.5rem;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.3); /* 預設深色透明底，確保Logo清楚 */
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.4); /* 背景稍微加深一點，讓 Logo 比較明顯 */
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
         }
 
-        .logo {
-            color: white;
-            font-size: 1.4rem;
-            font-weight: 900;
-            font-family: var(--font-serif);
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        /* Logo 圖片容器設定 */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            height: 100%;
             z-index: 1001;
+        }
+
+        .logo-img {
+            /* 關鍵設定：限制最大高度，讓它不會撐破導覽列 */
+            height: 50px; 
+            width: auto; /* 保持比例 */
+            object-fit: contain;
+            /* 如果您的 Logo 是黑色的，這裡可以加個濾鏡讓它變白，如果是原本就是彩色或白色則刪除下面這行 */
+            /* filter: brightness(0) invert(1); */ 
         }
 
         /* 電腦版選單 */
@@ -81,6 +90,7 @@
             opacity: 0.9;
             transition: opacity 0.3s;
             position: relative;
+            letter-spacing: 0.5px;
         }
 
         .nav-links a::after {
@@ -96,7 +106,7 @@
 
         .nav-links a:hover::after { width: 100%; }
 
-        /* 手機漢堡按鈕 (預設隱藏) */
+        /* 手機漢堡按鈕 */
         .hamburger { display: none; cursor: pointer; z-index: 1001; }
         .bar {
             display: block;
@@ -107,23 +117,25 @@
             transition: all 0.3s ease-in-out;
         }
 
-        /* --- 3. Hero Section (首頁視覺) --- */
+        /* --- 3. Hero Section --- */
         .hero {
-            height: 100vh; /* 滿版高度 */
+            height: 100vh;
             min-height: 600px;
-            background-image: url('https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?q=80&w=2000&auto=format&fit=crop');
+            /* 這裡換一張更乾淨的雪景，讓 Logo 更突出 */
+            background-image: url('https://images.unsplash.com/photo-1491002052546-bf38f186af56?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             position: relative;
+            padding-top: var(--nav-height); /* 避免內容被導覽列遮住 */
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+            background: rgba(10, 25, 45, 0.4); /* 藍黑色遮罩 */
         }
 
         .hero-content {
@@ -134,14 +146,14 @@
 
         .glass-box {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 3.5rem;
             border-radius: 20px;
             max-width: 750px;
             color: white;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
         }
 
         .hero h1 {
@@ -177,9 +189,7 @@
         }
 
         /* --- 4. 區塊樣式 --- */
-        .section {
-            padding: 6rem 0; /* 電腦版保留大留白 */
-        }
+        .section { padding: 6rem 0; }
 
         .section-header {
             text-align: center;
@@ -201,7 +211,7 @@
             font-size: 1.1rem;
         }
 
-        /* 卡片網格 */
+        /* Grid System */
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -226,7 +236,6 @@
         }
 
         .card-content { padding: 2rem; }
-        
         .card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; }
         
         .card p {
@@ -245,7 +254,7 @@
             gap: 5px;
         }
 
-        /* --- 5. 圖文交錯區 --- */
+        /* --- 5. Feature Split --- */
         .feature-split {
             display: flex;
             align-items: center;
@@ -263,7 +272,6 @@
             position: relative;
         }
         
-        /* 裝飾性框線，增加層次感 */
         .feature-img::after {
             content: '';
             position: absolute;
@@ -275,21 +283,10 @@
         }
 
         .feature-text { flex: 1; }
+        .feature-text h2 { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1.5rem; }
+        .feature-text p { color: var(--text-grey); margin-bottom: 2rem; font-size: 1.05rem; }
 
-        .feature-text h2 {
-            font-family: var(--font-serif);
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.3;
-        }
-
-        .feature-text p {
-            color: var(--text-grey);
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-        }
-
-        /* --- Footer --- */
+        /* Footer */
         footer {
             background: #0B1120;
             color: rgba(255,255,255,0.7);
@@ -298,24 +295,37 @@
             font-size: 0.9rem;
             margin-top: 6rem;
         }
+        
+        /* Footer Logo specific style */
+        .footer-logo {
+            height: 40px;
+            width: auto;
+            margin-bottom: 1rem;
+            filter: brightness(0) invert(1); /* 強制把 Logo 變白色以適應深色背景 */
+            opacity: 0.8;
+        }
 
         /* =========================================
-           ★ MOBILE RESPONSIVE STYLES (手機版優化核心)
+           ★ MOBILE RESPONSIVE 
            ========================================= */
         @media (max-width: 768px) {
+            :root { --nav-height: 70px; }
             
-            /* 1. 導覽列變漢堡選單 */
+            .navbar { padding: 0 1rem; }
+            
+            /* Logo Mobile Size */
+            .logo-img { height: 40px; } /* 手機版 Logo 稍微縮小 */
+
             .hamburger { display: block; }
             
             .nav-links {
                 position: fixed;
                 left: -100%;
-                top: 70px;
+                top: var(--nav-height);
                 flex-direction: column;
-                background-color: rgba(11, 17, 32, 0.95); /* 深色磨砂背景 */
-                backdrop-filter: blur(10px);
+                background-color: rgba(11, 17, 32, 0.98);
                 width: 100%;
-                height: calc(100vh - 70px);
+                height: calc(100vh - var(--nav-height));
                 gap: 0;
                 text-align: center;
                 transition: 0.3s;
@@ -323,86 +333,35 @@
             }
 
             .nav-links.active { left: 0; }
-
-            .nav-links a {
-                padding: 1.5rem 0;
-                display: block;
-                font-size: 1.2rem; /* 手機版字體加大，好點擊 */
-                border-bottom: 1px solid rgba(255,255,255,0.05);
-            }
+            .nav-links a { padding: 1.5rem 0; display: block; font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
             
-            /* 漢堡按鈕動畫類別 */
             .hamburger.active .bar:nth-child(2) { opacity: 0; }
             .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
             .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-            /* 2. Hero 調整 */
-            .hero { height: 90vh; /* 手機不需要太高 */ }
+            .hero { height: 90vh; }
+            .glass-box { padding: 2rem 1.5rem; margin: 0 1rem; background: rgba(0, 0, 0, 0.4); }
+            .hero h1 { font-size: 2.2rem; }
             
-            .glass-box {
-                padding: 2rem 1.5rem; /* 縮小內距 */
-                margin: 0 1rem;
-                background: rgba(0, 0, 0, 0.3); /* 手機背景加深，提高文字閱讀性 */
-                backdrop-filter: blur(8px);
-                border: 1px solid rgba(255,255,255,0.15);
-            }
-
-            .hero h1 {
-                font-size: 2.2rem; /* 標題縮小 */
-                margin-bottom: 1rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-                margin-bottom: 2rem;
-                line-height: 1.6;
-            }
-
-            .btn-primary {
-                width: 100%; /* 手機版按鈕全寬，好按 */
-                text-align: center;
-            }
-
-            /* 3. 區塊間距調整 */
             .section { padding: 4rem 0; }
-            
-            .section-header { margin-bottom: 2.5rem; }
             .section-header h2 { font-size: 2rem; }
-
-            /* 4. 卡片調整 */
-            .grid-3 {
-                grid-template-columns: 1fr; /* 強制單欄 */
-                gap: 1.5rem;
-            }
-
-            .card {
-                margin: 0 0.5rem; /* 左右留一點邊 */
-                box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            }
-
-            /* 5. 圖文交錯區變更順序 */
-            .feature-split {
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            .feature-img {
-                width: 100%;
-                height: 300px;
-                border-radius: 16px;
-            }
             
-            .feature-img::after { display: none; /* 手機版拿掉裝飾框，保持簡潔 */ }
-
+            .grid-3 { grid-template-columns: 1fr; gap: 1.5rem; }
+            .card { margin: 0 0.5rem; }
+            
+            .feature-split { flex-direction: column; gap: 2rem; }
+            .feature-img { width: 100%; height: 300px; }
+            .feature-img::after { display: none; }
             .feature-text { text-align: center; }
-            .feature-text h2 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo">HOTSNOW</div>
+        <a href="#" class="logo-container">
+            <img src="logo.png" alt="HotSnow Logo" class="logo-img">
+        </a>
         
         <div class="hamburger" onclick="toggleMenu()">
             <span class="bar"></span>
@@ -477,7 +436,7 @@
 
     <footer>
         <div class="container">
-            <div class="logo" style="margin-bottom: 1rem;">HOTSNOW</div>
+            <img src="logo.png" alt="HotSnow" class="footer-logo">
             <p>Copyright © 2025 HotSnow International. <br class="mobile-break">All Rights Reserved.</p>
         </div>
     </footer>
