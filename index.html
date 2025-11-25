@@ -13,26 +13,20 @@
         /* --- 1. 核心變數 --- */
         :root {
             --primary-blue: #00A3E0;
-            --primary-dark: #007dae;
             --ice-white: #F9FCFF;
             --text-dark: #1A1A1A;
             --text-grey: #555555;
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --font-serif: 'Noto Serif TC', serif;
-            --font-sans: 'Inter', 'Noto Sans TC', sans-serif;
-            --nav-height: 80px; /* 定義導覽列高度 */
+            --nav-height: 80px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: var(--font-sans);
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
             color: var(--text-dark);
             background-color: var(--ice-white);
             line-height: 1.7;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
         }
 
         a { text-decoration: none; color: inherit; }
@@ -43,7 +37,7 @@
             padding: 0 1.5rem;
         }
 
-        /* --- 2. 質感導覽列 (圖片 Logo 優化版) --- */
+        /* --- 2. 導覽列 --- */
         .navbar {
             position: fixed;
             top: 0;
@@ -54,34 +48,28 @@
             align-items: center;
             padding: 0 1.5rem;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.4); /* 背景稍微加深一點，讓 Logo 比較明顯 */
+            /* 背景加深，讓 Logo 的黑色背景融合得更好 */
+            background: rgba(0, 0, 0, 0.6); 
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s ease;
         }
 
-        /* Logo 圖片容器設定 */
         .logo-container {
             display: flex;
             align-items: center;
             height: 100%;
-            z-index: 1001;
         }
 
         .logo-img {
-            /* 關鍵設定：限制最大高度，讓它不會撐破導覽列 */
-            height: 50px; 
-            width: auto; /* 保持比例 */
+            height: 55px; /* 調整 Logo 大小 */
+            width: auto;
             object-fit: contain;
-            /* 如果您的 Logo 是黑色的，這裡可以加個濾鏡讓它變白，如果是原本就是彩色或白色則刪除下面這行 */
-            /* filter: brightness(0) invert(1); */ 
+            /* ★ 關鍵魔法：讓 JPG 的黑色背景變透明，只留下白色文字 ★ */
+            mix-blend-mode: screen; 
+            opacity: 0.95;
         }
 
-        /* 電腦版選單 */
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-        }
+        .nav-links { display: flex; gap: 2.5rem; }
 
         .nav-links a {
             color: white;
@@ -90,59 +78,36 @@
             opacity: 0.9;
             transition: opacity 0.3s;
             position: relative;
-            letter-spacing: 0.5px;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--primary-blue);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after { width: 100%; }
-
-        /* 手機漢堡按鈕 */
-        .hamburger { display: none; cursor: pointer; z-index: 1001; }
-        .bar {
-            display: block;
-            width: 25px;
-            height: 2px;
-            margin: 5px auto;
-            background-color: white;
-            transition: all 0.3s ease-in-out;
-        }
+        .nav-links a:hover { opacity: 1; }
+        
+        /* 漢堡選單 */
+        .hamburger { display: none; cursor: pointer; }
+        .bar { display: block; width: 25px; height: 2px; margin: 5px auto; background-color: white; transition: 0.3s; }
 
         /* --- 3. Hero Section --- */
         .hero {
             height: 100vh;
             min-height: 600px;
-            /* 這裡換一張更乾淨的雪景，讓 Logo 更突出 */
+            /* 背景圖：您可以之後替換成自己的雪場圖 */
             background-image: url('https://images.unsplash.com/photo-1491002052546-bf38f186af56?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             position: relative;
-            padding-top: var(--nav-height); /* 避免內容被導覽列遮住 */
+            padding-top: var(--nav-height);
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(10, 25, 45, 0.4); /* 藍黑色遮罩 */
+            background: rgba(0, 0, 0, 0.4);
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-        }
+        .hero-content { position: relative; z-index: 2; width: 100%; }
 
         .glass-box {
             background: rgba(255, 255, 255, 0.1);
@@ -157,18 +122,10 @@
         }
 
         .hero h1 {
+            font-family: 'Noto Serif TC', serif;
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
-            line-height: 1.2;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
-            font-weight: 300;
-            max-width: 90%;
         }
 
         .btn-primary {
@@ -179,7 +136,6 @@
             font-weight: 600;
             border-radius: 50px;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         
         .btn-primary:hover {
@@ -188,30 +144,12 @@
             transform: translateY(-2px);
         }
 
-        /* --- 4. 區塊樣式 --- */
+        /* --- 4. 內容區塊 --- */
         .section { padding: 6rem 0; }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .section-header h2 {
-            font-family: var(--font-serif);
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
-        .section-header p {
-            color: var(--text-grey);
-            font-size: 1.1rem;
-        }
-
-        /* Grid System */
+        
+        .section-header { text-align: center; margin-bottom: 4rem; max-width: 700px; margin: 0 auto 4rem auto; }
+        .section-header h2 { font-family: 'Noto Serif TC', serif; font-size: 2.5rem; margin-bottom: 1rem; }
+        
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -223,136 +161,64 @@
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.03);
+            transition: transform 0.3s;
         }
-
         .card:hover { transform: translateY(-8px); }
-
-        .card-img {
-            height: 240px;
-            background-size: cover;
-            background-position: center;
-        }
-
+        .card-img { height: 240px; background-size: cover; background-position: center; }
         .card-content { padding: 2rem; }
         .card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; }
-        
-        .card p {
-            font-size: 0.95rem;
-            color: var(--text-grey);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
+        .link-arrow { color: var(--primary-blue); font-weight: 600; }
 
-        .link-arrow {
-            color: var(--primary-blue);
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* --- 5. Feature Split --- */
-        .feature-split {
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-            margin-top: 2rem;
-        }
-
+        /* Feature Split */
+        .feature-split { display: flex; align-items: center; gap: 4rem; margin-top: 2rem; }
         .feature-img {
-            flex: 1;
-            height: 500px;
-            border-radius: 24px;
+            flex: 1; height: 500px; border-radius: 24px;
             background-image: url('https://images.unsplash.com/photo-1517253630699-c54829866b46?q=80&w=1600&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            position: relative;
+            background-size: cover; background-position: center;
         }
-        
-        .feature-img::after {
-            content: '';
-            position: absolute;
-            top: 20px; left: -20px;
-            width: 100%; height: 100%;
-            border: 2px solid var(--primary-blue);
-            border-radius: 24px;
-            z-index: -1;
-        }
-
         .feature-text { flex: 1; }
-        .feature-text h2 { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1.5rem; }
-        .feature-text p { color: var(--text-grey); margin-bottom: 2rem; font-size: 1.05rem; }
+        .feature-text h2 { font-family: 'Noto Serif TC', serif; font-size: 2.5rem; margin-bottom: 1.5rem; }
 
-        /* Footer */
+        /* --- Footer (修正版) --- */
         footer {
-            background: #0B1120;
+            background: #0B1120; /* 深藍黑色底 */
             color: rgba(255,255,255,0.7);
             padding: 4rem 0;
             text-align: center;
             font-size: 0.9rem;
             margin-top: 6rem;
         }
-        
-        /* Footer Logo specific style */
+
         .footer-logo {
-            height: 40px;
+            height: 45px;
             width: auto;
-            margin-bottom: 1rem;
-            filter: brightness(0) invert(1); /* 強制把 Logo 變白色以適應深色背景 */
-            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            /* ★ 這裡同樣使用 screen 濾鏡，讓黑色背景消失，只顯示白色文字 ★ */
+            mix-blend-mode: screen; 
+            /* 移除了原本的 invert 濾鏡，這就是導致原本顯示錯誤的原因 */
         }
 
-        /* =========================================
-           ★ MOBILE RESPONSIVE 
-           ========================================= */
+        /* --- Mobile Responsive --- */
         @media (max-width: 768px) {
             :root { --nav-height: 70px; }
+            .navbar { padding: 0 1rem; background: rgba(0, 0, 0, 0.8); /* 手機版背景更深一點 */ }
+            .logo-img { height: 40px; } 
             
-            .navbar { padding: 0 1rem; }
-            
-            /* Logo Mobile Size */
-            .logo-img { height: 40px; } /* 手機版 Logo 稍微縮小 */
-
             .hamburger { display: block; }
-            
             .nav-links {
-                position: fixed;
-                left: -100%;
-                top: var(--nav-height);
-                flex-direction: column;
-                background-color: rgba(11, 17, 32, 0.98);
-                width: 100%;
-                height: calc(100vh - var(--nav-height));
-                gap: 0;
-                text-align: center;
-                transition: 0.3s;
-                padding-top: 2rem;
+                position: fixed; left: -100%; top: var(--nav-height);
+                flex-direction: column; background-color: #0B1120;
+                width: 100%; height: calc(100vh - var(--nav-height));
+                gap: 0; padding-top: 2rem; transition: 0.3s;
             }
-
             .nav-links.active { left: 0; }
-            .nav-links a { padding: 1.5rem 0; display: block; font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+            .nav-links a { padding: 1.5rem 0; display: block; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.1); }
             
-            .hamburger.active .bar:nth-child(2) { opacity: 0; }
-            .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-            .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-            .hero { height: 90vh; }
-            .glass-box { padding: 2rem 1.5rem; margin: 0 1rem; background: rgba(0, 0, 0, 0.4); }
             .hero h1 { font-size: 2.2rem; }
+            .glass-box { padding: 2rem 1.5rem; margin: 0 1rem; background: rgba(0,0,0,0.5); }
             
-            .section { padding: 4rem 0; }
-            .section-header h2 { font-size: 2rem; }
-            
-            .grid-3 { grid-template-columns: 1fr; gap: 1.5rem; }
-            .card { margin: 0 0.5rem; }
-            
-            .feature-split { flex-direction: column; gap: 2rem; }
+            .feature-split { flex-direction: column; }
             .feature-img { width: 100%; height: 300px; }
-            .feature-img::after { display: none; }
-            .feature-text { text-align: center; }
         }
     </style>
 </head>
@@ -392,7 +258,6 @@
             <h2>全方位造雪解決方案</h2>
             <p>結合工程美學與物理科技，我們提供的不只是機器，而是完整的冰雪生態系。</p>
         </div>
-
         <div class="grid-3">
             <div class="card">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551524559-8af4e6624178?q=80&w=800&auto=format&fit=crop');"></div>
@@ -426,7 +291,6 @@
             <div class="feature-text">
                 <h2>不僅擬真，<br>更是超越天然。</h2>
                 <p>傳統人造雪往往潮濕、易融化成冰水。HotSnow 的 ST 技術產出的雪花，擁有獨特的乾燥結構。</p>
-                <p>這意味著更低的營運除濕成本、更舒適的遊玩體驗，以及更長的留存時間。</p>
                 <br>
                 <a href="#" class="btn-primary" style="background: var(--primary-blue); color: white;">深入了解技術原理</a>
             </div>
@@ -437,19 +301,15 @@
     <footer>
         <div class="container">
             <img src="logo.jpg" alt="HotSnow" class="footer-logo">
-            <p>Copyright © 2025 HotSnow International. <br class="mobile-break">All Rights Reserved.</p>
+            <p>Copyright © 2025 HotSnow International Ski Co., Ltd . All Rights Reserved.</p>
         </div>
     </footer>
 
     <script>
         function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const hamburger = document.querySelector('.hamburger');
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
+            document.getElementById('navLinks').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
         }
     </script>
-
 </body>
 </html>
-
