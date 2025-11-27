@@ -1,318 +1,203 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HotSnow 熱雪國際 | 頂級常溫造雪技術</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Inter:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HotSnow — 在任何地方享受玩雪的樂趣</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0099ff;
+    --darkblue: #0066bb;
+    --gray: #8fa3b8;
+    --bg: #f6f8fb;
+    --glass: rgba(255,255,255,0.5);
+  }
+  body {
+    margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #222;
+  }
 
-    <style>
-        /* --- 1. 核心變數 --- */
-        :root {
-            --primary-blue: #00A3E0;
-            --ice-white: #F9FCFF;
-            --text-dark: #1A1A1A;
-            --text-grey: #555555;
-            --nav-height: 80px;
-        }
+  /* NAV */
+  nav{
+    position: fixed; top:0; left:0; right:0; z-index:10;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(8px);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:15px 40px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+  }
+  nav a { text-decoration:none; color:#222; margin:0 12px; font-weight:500; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* HERO */
+  header{
+    height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    color:white; text-align:center;
+    background:url("https://images.unsplash.com/photo-1516569422678-0b45da2d743b?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+    position:relative;
+  }
+  header::after{
+    content:""; position:absolute; top:0; left:0; right:0; bottom:0;
+    background:linear-gradient(180deg,rgba(0,0,0,0.3),rgba(0,0,0,0.55));
+  }
+  .hero-content{
+    position:relative; max-width:850px; padding:20px;
+  }
+  .hero-content h1{
+    font-size:48px; font-weight:800; margin-bottom:12px;
+    line-height:1.25;
+  }
+  .hero-content p{
+    font-size:20px; margin-bottom:40px;
+  }
+  .cta{
+    background:var(--blue); color:white; padding:14px 32px;
+    border-radius:8px; border:none; font-size:18px;
+    cursor:pointer; transition:.25s;
+  }
+  .cta:hover{ background:var(--darkblue); }
 
-        body {
-            font-family: 'Inter', 'Noto Sans TC', sans-serif;
-            color: var(--text-dark);
-            background-color: var(--ice-white);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
+  section{padding:80px 40px; max-width:1200px; margin:auto;}
+  h2{ font-size:32px; color:var(--blue); margin-bottom:20px; }
 
-        a { text-decoration: none; color: inherit; }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
+  /* PRODUCT CARDS */
+  .product-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:24px;
+  }
+  .card{
+    background:white; border-radius:12px; overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    transition:.3s;
+  }
+  .card:hover{ transform:translateY(-6px); }
+  .card img{ width:100%; height:190px; object-fit:cover; }
+  .card-body{ padding:16px; }
+  .card-body h3{ margin:0 0 6px; font-size:20px; }
 
-        /* --- 2. 導覽列 --- */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: var(--nav-height);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 1.5rem;
-            z-index: 1000;
-            /* 背景加深，讓 Logo 的黑色背景融合得更好 */
-            background: rgba(0, 0, 0, 0.6); 
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
+  /* CASES MOSAIC */
+  .mosaic{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    grid-auto-rows:260px;
+    gap:12px;
+  }
+  .mosaic img{ width:100%; height:100%; object-fit:cover; border-radius:10px; }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
+  /* FAQ */
+  details{
+    background:white; padding:18px 22px; margin-bottom:14px;
+    border-radius:10px; cursor:pointer;
+    box-shadow:0 2px 6px rgba(0,0,0,0.05);
+  }
 
-        .logo-img {
-            height: 55px; /* 調整 Logo 大小 */
-            width: auto;
-            object-fit: contain;
-            /* ★ 關鍵魔法：讓 JPG 的黑色背景變透明，只留下白色文字 ★ */
-            mix-blend-mode: screen; 
-            opacity: 0.95;
-        }
+  /* CONTACT */
+  form{
+    display:flex; flex-direction:column; gap:12px;
+    background:white; padding:24px; border-radius:12px;
+    max-width:450px; margin:auto;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+  }
+  input, textarea{
+    padding:10px; border:1px solid #ccc; border-radius:6px;
+  }
 
-        .nav-links { display: flex; gap: 2.5rem; }
-
-        .nav-links a {
-            color: white;
-            font-size: 0.95rem;
-            font-weight: 500;
-            opacity: 0.9;
-            transition: opacity 0.3s;
-            position: relative;
-        }
-
-        .nav-links a:hover { opacity: 1; }
-        
-        /* 漢堡選單 */
-        .hamburger { display: none; cursor: pointer; }
-        .bar { display: block; width: 25px; height: 2px; margin: 5px auto; background-color: white; transition: 0.3s; }
-
-        /* --- 3. Hero Section --- */
-        .hero {
-            height: 100vh;
-            min-height: 600px;
-            /* 背景圖：您可以之後替換成自己的雪場圖 */
-            background-image: url('https://images.unsplash.com/photo-1491002052546-bf38f186af56?q=80&w=2000&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding-top: var(--nav-height);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.4);
-        }
-
-        .hero-content { position: relative; z-index: 2; width: 100%; }
-
-        .glass-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 3.5rem;
-            border-radius: 20px;
-            max-width: 750px;
-            color: white;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-        }
-
-        .hero h1 {
-            font-family: 'Noto Serif TC', serif;
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .btn-primary {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: white;
-            color: #000;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary:hover {
-            background: var(--primary-blue);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* --- 4. 內容區塊 --- */
-        .section { padding: 6rem 0; }
-        
-        .section-header { text-align: center; margin-bottom: 4rem; max-width: 700px; margin: 0 auto 4rem auto; }
-        .section-header h2 { font-family: 'Noto Serif TC', serif; font-size: 2.5rem; margin-bottom: 1rem; }
-        
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            transition: transform 0.3s;
-        }
-        .card:hover { transform: translateY(-8px); }
-        .card-img { height: 240px; background-size: cover; background-position: center; }
-        .card-content { padding: 2rem; }
-        .card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; }
-        .link-arrow { color: var(--primary-blue); font-weight: 600; }
-
-        /* Feature Split */
-        .feature-split { display: flex; align-items: center; gap: 4rem; margin-top: 2rem; }
-        .feature-img {
-            flex: 1; height: 500px; border-radius: 24px;
-            background-image: url('https://images.unsplash.com/photo-1517253630699-c54829866b46?q=80&w=1600&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-        }
-        .feature-text { flex: 1; }
-        .feature-text h2 { font-family: 'Noto Serif TC', serif; font-size: 2.5rem; margin-bottom: 1.5rem; }
-
-        /* --- Footer (修正版) --- */
-        footer {
-            background: #0B1120; /* 深藍黑色底 */
-            color: rgba(255,255,255,0.7);
-            padding: 4rem 0;
-            text-align: center;
-            font-size: 0.9rem;
-            margin-top: 6rem;
-        }
-
-        .footer-logo {
-            height: 45px;
-            width: auto;
-            margin-bottom: 1.5rem;
-            /* ★ 這裡同樣使用 screen 濾鏡，讓黑色背景消失，只顯示白色文字 ★ */
-            mix-blend-mode: screen; 
-            /* 移除了原本的 invert 濾鏡，這就是導致原本顯示錯誤的原因 */
-        }
-
-        /* --- Mobile Responsive --- */
-        @media (max-width: 768px) {
-            :root { --nav-height: 70px; }
-            .navbar { padding: 0 1rem; background: rgba(0, 0, 0, 0.8); /* 手機版背景更深一點 */ }
-            .logo-img { height: 40px; } 
-            
-            .hamburger { display: block; }
-            .nav-links {
-                position: fixed; left: -100%; top: var(--nav-height);
-                flex-direction: column; background-color: #0B1120;
-                width: 100%; height: calc(100vh - var(--nav-height));
-                gap: 0; padding-top: 2rem; transition: 0.3s;
-            }
-            .nav-links.active { left: 0; }
-            .nav-links a { padding: 1.5rem 0; display: block; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.1); }
-            
-            .hero h1 { font-size: 2.2rem; }
-            .glass-box { padding: 2rem 1.5rem; margin: 0 1rem; background: rgba(0,0,0,0.5); }
-            
-            .feature-split { flex-direction: column; }
-            .feature-img { width: 100%; height: 300px; }
-        }
-    </style>
+  footer{
+    text-align:center; padding:40px 10px;
+    color:#666;
+  }
+</style>
 </head>
+
 <body>
 
-    <nav class="navbar">
-        <a href="#" class="logo-container">
-            <img src="logo.jpg" alt="HotSnow Logo" class="logo-img">
-        </a>
-        
-        <div class="hamburger" onclick="toggleMenu()">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
+<nav>
+  <b style="color:#0066bb; font-size:20px;">HotSnow</b>
+  <div>
+    <a href="#product">產品</a>
+    <a href="#cases">案例</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">聯絡</a>
+  </div>
+</nav>
 
-        <div class="nav-links" id="navLinks">
-            <a href="#" onclick="toggleMenu()">品牌故事</a>
-            <a href="#" onclick="toggleMenu()">造雪技術</a>
-            <a href="#" onclick="toggleMenu()">成功案例</a>
-            <a href="#" onclick="toggleMenu()">聯絡我們</a>
-        </div>
-    </nav>
+<header>
+  <div class="hero-content">
+    <h1>在沒有雪的地方、不下雪的季節<br>也可以享受玩雪的樂趣！</h1>
+    <p>HotSnow 將真實雪地觸感帶入城市與商業空間</p>
+    <button class="cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      立即獲取方案
+    </button>
+  </div>
+</header>
 
-    <header class="hero">
-        <div class="container hero-content">
-            <div class="glass-box">
-                <h1>突破季節限制，<br>打造極致雪境。</h1>
-                <p>HotSnow 專利常溫 ST 造雪技術，為您在任何溫度下創造真實、乾燥且潔白的冰雪體驗。</p>
-                <a href="#" class="btn-primary">探索技術應用</a>
-            </div>
-        </div>
-    </header>
+<section id="product">
+  <h2>HotSnow 仿雪解決方案</h2>
+  <div class="product-grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1608889175169-3a438fcb5a6d?q=80&w=1200" />
+      <div class="card-body">
+        <h3>雪地遊樂場</h3>
+        <p>打造四季恒溫的兒童雪世界，安全不融化。</p>
+      </div>
+    </div>
 
-    <section class="section container">
-        <div class="section-header">
-            <h2>全方位造雪解決方案</h2>
-            <p>結合工程美學與物理科技，我們提供的不只是機器，而是完整的冰雪生態系。</p>
-        </div>
-        <div class="grid-3">
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551524559-8af4e6624178?q=80&w=800&auto=format&fit=crop');"></div>
-                <div class="card-content">
-                    <h3>常溫造雪系統</h3>
-                    <p>突破 0°C 限制，在常溫環境下運作。雪質潔白乾燥，無需厚重防寒衣物即可享受戲雪樂趣。</p>
-                    <a href="#" class="link-arrow">了解規格 →</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1523585895729-7495f867d06f?q=80&w=800&auto=format&fit=crop');"></div>
-                <div class="card-content">
-                    <h3>滑雪樂園規劃</h3>
-                    <p>從坡度設計、動線規劃到安全防護，為您打造符合國際標準的室內滑雪場域。</p>
-                    <a href="#" class="link-arrow">查看案例 →</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?q=80&w=800&auto=format&fit=crop');"></div>
-                <div class="card-content">
-                    <h3>商業景觀營造</h3>
-                    <p>為百貨櫥窗、展覽活動或拍攝現場，提供即時、高質感的飄雪與積雪場景。</p>
-                    <a href="#" class="link-arrow">預約諮詢 →</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1498575207490-3e57ecbb5722?q=80&w=1200" />
+      <div class="card-body">
+        <h3>滑雪坡 / 雪橇道</h3>
+        <p>真實摩擦係數，室內外皆可體驗雪地速度。</p>
+      </div>
+    </div>
 
-    <section class="section container" style="background-color: #f0f7ff; border-radius: 30px; padding: 4rem 2rem;">
-        <div class="feature-split">
-            <div class="feature-text">
-                <h2>不僅擬真，<br>更是超越天然。</h2>
-                <p>傳統人造雪往往潮濕、易融化成冰水。HotSnow 的 ST 技術產出的雪花，擁有獨特的乾燥結構。</p>
-                <br>
-                <a href="#" class="btn-primary" style="background: var(--primary-blue); color: white;">深入了解技術原理</a>
-            </div>
-            <div class="feature-img"></div>
-        </div>
-    </section>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1483356256511-b48749959172?q=80&w=1200" />
+      <div class="card-body">
+        <h3>展覽造景 / 聖誕活動</h3>
+        <p>零維護、可回收，打造商業與季節氛圍。</p>
+      </div>
+    </div>
 
-    <footer>
-        <div class="container">
-            <img src="logo.jpg" alt="HotSnow" class="footer-logo">
-            <p>Copyright © 2025 <br>HotSnow International Ski Co., Ltd.<br>All Rights Reserved.</p>
-        </div>
-    </footer>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1555492456-fa2c5101f0f3?q=80&w=1200" />
+      <div class="card-body">
+        <h3>藝術展示 / 舞台</h3>
+        <p>穩定光影表現，多次施工也不變質。</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-            document.querySelector('.hamburger').classList.toggle('active');
-        }
-    </script>
+<section id="cases">
+  <h2>打造夢想般的雪景，HotSnow 已合作展示</h2>
+  <div class="mosaic">
+    <img src="https://images.unsplash.com/photo-1517699418036-6adf0b7d81f2?q=80&w=1200">
+    <img src="https://images.unsplash.com/photo-1446463969211-28a2edc5ab6a?q=80&w=1200">
+    <img src="https://images.unsplash.com/photo-1518178161280-1df8ce29d440?q=80&w=1200">
+    <img src="https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?q=80&w=1200">
+  </div>
+</section>
+
+<section id="faq">
+  <h2>常見問題</h2>
+  <details><summary>需要冷氣或低溫設備嗎？</summary>不需要，室溫即可使用。</details>
+  <details><summary>會不會溶化？</summary>不會，它是物理材料模擬雪地觸感。</details>
+  <details><summary>是否可回收？</summary>可循環使用、可裁切、可重組。</details>
+</section>
+
+<section id="contact">
+  <h2>聯絡 HotSnow</h2>
+  <form>
+    <input placeholder="您的姓名">
+    <input placeholder="Email">
+    <textarea placeholder="請描述用途或需求"></textarea>
+    <button class="cta" type="submit">送出詢問</button>
+  </form>
+</section>
+
+<footer>
+  ©2025 HotSnow
+</footer>
+
 </body>
 </html>
-
-
-
