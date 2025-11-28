@@ -1,203 +1,147 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HotSnow — 在任何地方享受玩雪的樂趣</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-<style>
-  :root {
-    --blue: #0099ff;
-    --darkblue: #0066bb;
-    --gray: #8fa3b8;
-    --bg: #f6f8fb;
-    --glass: rgba(255,255,255,0.5);
-  }
-  body {
-    margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #222;
-  }
-
-  /* NAV */
-  nav{
-    position: fixed; top:0; left:0; right:0; z-index:10;
-    background: rgba(255,255,255,0.75);
-    backdrop-filter: blur(8px);
-    display:flex; justify-content:space-between; align-items:center;
-    padding:15px 40px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.08);
-  }
-  nav a { text-decoration:none; color:#222; margin:0 12px; font-weight:500; }
-
-  /* HERO */
-  header{
-    height:100vh;
-    display:flex; align-items:center; justify-content:center;
-    color:white; text-align:center;
-    background:url("https://images.unsplash.com/photo-1516569422678-0b45da2d743b?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
-    position:relative;
-  }
-  header::after{
-    content:""; position:absolute; top:0; left:0; right:0; bottom:0;
-    background:linear-gradient(180deg,rgba(0,0,0,0.3),rgba(0,0,0,0.55));
-  }
-  .hero-content{
-    position:relative; max-width:850px; padding:20px;
-  }
-  .hero-content h1{
-    font-size:48px; font-weight:800; margin-bottom:12px;
-    line-height:1.25;
-  }
-  .hero-content p{
-    font-size:20px; margin-bottom:40px;
-  }
-  .cta{
-    background:var(--blue); color:white; padding:14px 32px;
-    border-radius:8px; border:none; font-size:18px;
-    cursor:pointer; transition:.25s;
-  }
-  .cta:hover{ background:var(--darkblue); }
-
-  section{padding:80px 40px; max-width:1200px; margin:auto;}
-  h2{ font-size:32px; color:var(--blue); margin-bottom:20px; }
-
-  /* PRODUCT CARDS */
-  .product-grid{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:24px;
-  }
-  .card{
-    background:white; border-radius:12px; overflow:hidden;
-    box-shadow:0 2px 8px rgba(0,0,0,0.08);
-    transition:.3s;
-  }
-  .card:hover{ transform:translateY(-6px); }
-  .card img{ width:100%; height:190px; object-fit:cover; }
-  .card-body{ padding:16px; }
-  .card-body h3{ margin:0 0 6px; font-size:20px; }
-
-  /* CASES MOSAIC */
-  .mosaic{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    grid-auto-rows:260px;
-    gap:12px;
-  }
-  .mosaic img{ width:100%; height:100%; object-fit:cover; border-radius:10px; }
-
-  /* FAQ */
-  details{
-    background:white; padding:18px 22px; margin-bottom:14px;
-    border-radius:10px; cursor:pointer;
-    box-shadow:0 2px 6px rgba(0,0,0,0.05);
-  }
-
-  /* CONTACT */
-  form{
-    display:flex; flex-direction:column; gap:12px;
-    background:white; padding:24px; border-radius:12px;
-    max-width:450px; margin:auto;
-    box-shadow:0 2px 6px rgba(0,0,0,0.08);
-  }
-  input, textarea{
-    padding:10px; border:1px solid #ccc; border-radius:6px;
-  }
-
-  footer{
-    text-align:center; padding:40px 10px;
-    color:#666;
-  }
-</style>
-</head>
-
-<body>
-
-<nav>
-  <b style="color:#0066bb; font-size:20px;">HotSnow</b>
-  <div>
-    <a href="#product">產品</a>
-    <a href="#cases">案例</a>
-    <a href="#faq">FAQ</a>
-    <a href="#contact">聯絡</a>
-  </div>
-</nav>
-
-<header>
-  <div class="hero-content">
-    <h1>在沒有雪的地方、不下雪的季節<br>也可以享受玩雪的樂趣！</h1>
-    <p>HotSnow 將真實雪地觸感帶入城市與商業空間</p>
-    <button class="cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-      立即獲取方案
-    </button>
-  </div>
-</header>
-
-<section id="product">
-  <h2>HotSnow 仿雪解決方案</h2>
-  <div class="product-grid">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1608889175169-3a438fcb5a6d?q=80&w=1200" />
-      <div class="card-body">
-        <h3>雪地遊樂場</h3>
-        <p>打造四季恒溫的兒童雪世界，安全不融化。</p>
-      </div>
+<header class="kubio-header">
+    <div class="kubio-container">
+        <a href="#home" class="kubio-logo">
+            <!-- 請替換為您的 Logo 圖片路徑 -->
+            <img src="images/hotsnow-logo.png" alt="HotSnow Logo">
+        </a>
+        <nav class="kubio-nav">
+            <a href="#home">首頁 (Home)</a>
+            <a href="#why-us">關於我們 (About Us)</a>
+            <a href="#projects">產品 (Product)</a>
+            <a href="#contact">聯絡我們 (Contact)</a>
+        </nav>
+        <!-- 手機版選單按鈕（CSS控制顯示/隱藏） -->
+        <button class="menu-toggle">&#9776;</button>
     </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1498575207490-3e57ecbb5722?q=80&w=1200" />
-      <div class="card-body">
-        <h3>滑雪坡 / 雪橇道</h3>
-        <p>真實摩擦係數，室內外皆可體驗雪地速度。</p>
-      </div>
+</header><section id="home" class="kubio-section kubio-hero">
+    <div class="kubio-container kubio-row">
+        <div class="hero-text">
+            <h1>HotSnow：常溫雪的科技革命</h1>
+            <p>我們的專利室溫人造雪材料，無需電力和冷卻，讓您在任何季節、任何地點都能享受造雪人和滑雪的樂趣。</p>
+            <a href="#projects" class="kubio-button">探索我們的產品</a>
+        </div>
+        <div class="hero-media">
+            <!-- YouTube 影片嵌入 - 影片 ID: 8-8L0We3xwc -->
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/8-8L0We3xwc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
     </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1483356256511-b48749959172?q=80&w=1200" />
-      <div class="card-body">
-        <h3>展覽造景 / 聖誕活動</h3>
-        <p>零維護、可回收，打造商業與季節氛圍。</p>
-      </div>
+</section><section id="great-at" class="kubio-section">
+    <div class="kubio-container">
+        <h2 class="section-title">我們擅長的事項</h2>
+        <div class="kubio-row feature-grid">
+            <div class="feature-item">
+                <img src="images/icon-rd.svg" alt="R&D" class="feature-icon">
+                <h3>專利研發技術</h3>
+                <p>專注於室溫人造雪材料的研發、製造和銷售，獲得台灣與中國創新專利。</p>
+            </div>
+            <div class="feature-item">
+                <img src="images/icon-project.svg" alt="Projects" class="feature-icon">
+                <h3>雪樂園總體解決方案</h3>
+                <p>提供雪地娛樂活動的整體解決方案，已成功實施超過 30 個大型雪地公園專案。</p>
+            </div>
+            <div class="feature-item">
+                <img src="images/icon-market.svg" alt="Market" class="feature-icon">
+                <h3>國際市場經驗</h3>
+                <p>市場遍及台灣、越南、中國大陸和馬來西亞，擁有豐富的國際合作與市場運營經驗。</p>
+            </div>
+        </div>
     </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1555492456-fa2c5101f0f3?q=80&w=1200" />
-      <div class="card-body">
-        <h3>藝術展示 / 舞台</h3>
-        <p>穩定光影表現，多次施工也不變質。</p>
-      </div>
+</section><section id="why-us" class="kubio-section kubio-light-bg">
+    <div class="kubio-container">
+        <h2 class="section-title">關於我們：企業願景與里程碑</h2>
+        <div class="kubio-row align-center">
+            <div class="column-50">
+                <p>我們的願景是：讓無雪的地區和季節也能享受雪地樂趣。HotSnow 團隊始終致力於技術創新與品質卓越。</p>
+                <ul class="milestone-list">
+                    <li>2015 年 8 月：榮獲 SBIR (小型企業創新研究) 獎項。</li>
+                    <li>2017 年 2 月：獲得台灣 HotSnow 創新專利。</li>
+                    <li>2021 年 11 月：馬來西亞首個 HotSnow 雪坡落成。</li>
+                    <li>2022 年 11 月：參與台灣最大型活動「2022 新北耶誕城」。</li>
+                </ul>
+            </div>
+            <div class="column-50">
+                <img src="images/team-placeholder.jpg" alt="Our Team Placeholder" class="responsive-img">
+            </div>
+        </div>
     </div>
-  </div>
-</section>
-
-<section id="cases">
-  <h2>打造夢想般的雪景，HotSnow 已合作展示</h2>
-  <div class="mosaic">
-    <img src="https://images.unsplash.com/photo-1517699418036-6adf0b7d81f2?q=80&w=1200">
-    <img src="https://images.unsplash.com/photo-1446463969211-28a2edc5ab6a?q=80&w=1200">
-    <img src="https://images.unsplash.com/photo-1518178161280-1df8ce29d440?q=80&w=1200">
-    <img src="https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?q=80&w=1200">
-  </div>
-</section>
-
-<section id="faq">
-  <h2>常見問題</h2>
-  <details><summary>需要冷氣或低溫設備嗎？</summary>不需要，室溫即可使用。</details>
-  <details><summary>會不會溶化？</summary>不會，它是物理材料模擬雪地觸感。</details>
-  <details><summary>是否可回收？</summary>可循環使用、可裁切、可重組。</details>
-</section>
-
-<section id="contact">
-  <h2>聯絡 HotSnow</h2>
-  <form>
-    <input placeholder="您的姓名">
-    <input placeholder="Email">
-    <textarea placeholder="請描述用途或需求"></textarea>
-    <button class="cta" type="submit">送出詢問</button>
-  </form>
-</section>
-
-<footer>
-  ©2025 HotSnow
-</footer>
-
-</body>
-</html>
+</section><section id="projects" class="kubio-section">
+    <div class="kubio-container">
+        <h2 class="section-title">我們的產品與雪地專案</h2>
+        <div class="kubio-row project-grid">
+            <div class="project-card">
+                <img src="images/product-park.jpg" alt="Snow Fun Park" class="responsive-img">
+                <h3>兒童雪樂園</h3>
+                <p>專為家庭設計，可輕鬆建造雪人和進行安全、無融化風險的雪地遊戲。</p>
+            </div>
+            <div class="project-card">
+                <img src="images/product-slope.jpg" alt="Ski Slope" class="responsive-img">
+                <h3>HotSnow 滑雪/雪板坡道</h3>
+                <p>提供專業級滑雪體驗，無需低溫環境，即可享受長達一年的滑雪樂趣。</p>
+            </div>
+            <div class="project-card">
+                <img src="images/product-diy.jpg" alt="Snowman DIY" class="responsive-img">
+                <h3>雪人/北極熊 DIY 材料</h3>
+                <p>獨家 DIY 材料包，讓您在家中或活動中製作出 Q 彈且栩栩如生的雪地藝術品。</p>
+            </div>
+        </div>
+    </div>
+</section><section id="testimonials" class="kubio-section kubio-dark-bg">
+    <div class="kubio-container">
+        <h2 class="section-title">客戶見證</h2>
+        <div class="kubio-row quote-container">
+            <blockquote class="testimonial-quote">
+                「HotSnow 讓我們的聖誕活動首次實現了真正的雪景，獲得了巨大的成功。孩子們愛極了！」
+                <footer>— TVBS (2022 新北耶誕城合作夥伴)</footer>
+            </blockquote>
+        </div>
+    </div>
+</section><section id="numbers" class="kubio-section">
+    <div class="kubio-container">
+        <h2 class="section-title">我們的成果數字</h2>
+        <div class="kubio-row stats-bar">
+            <div class="stat-item">
+                <h3>30+</h3>
+                <p>雪地娛樂專案</p>
+            </div>
+            <div class="stat-item">
+                <h3>500K+</h3>
+                <p>滿意顧客人次</p>
+            </div>
+            <div class="stat-item">
+                <h3>10+</h3>
+                <p>國際專利榮譽</p>
+            </div>
+        </div>
+    </div>
+</section><section id="contact" class="kubio-section kubio-cta-bg">
+    <div class="kubio-container cta-content">
+        <h2 class="section-title">立即體驗常溫雪的魔力</h2>
+        <p>探索我們的部落格以了解最新應用，或直接聯絡我們開啟您的雪地專案！</p>
+        <div class="kubio-row cta-buttons">
+            <a href="#" class="kubio-button button-white">探索部落格 (Blog)</a>
+            <a href="#contact-info" class="kubio-button">聯絡我們</a>
+        </div>
+    </div>
+</section><section id="contact-info" class="kubio-section kubio-light-bg">
+    <div class="kubio-container kubio-row">
+        <div class="column-50">
+            <h3>HotSnow 國際雪科技</h3>
+            <p><strong>電話：</strong>(請替換)
+            <p><strong>電子郵件：</strong>info@hotsnow.com.tw
+            <p><strong>地址：</strong>(請替換您的地址)</p>
+            <!-- 這裡可以放地圖或聯絡表單 -->
+        </div>
+        <div class="column-50">
+            <h3>社群媒體</h3>
+            <!-- 這裡可以放社群媒體圖標連結 -->
+            <a href="#" class="social-icon">FB</a>
+            <a href="#" class="social-icon">IG</a>
+        </div>
+    </div>
+</section><footer class="kubio-footer">
+    <div class="kubio-container">
+        <p>&copy; 2025 HotSnow International Ski Co., Ltd. 版權所有</p>
+    </div>
+</footer><script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.kubio-nav');toggle.addEventListener('click', () => { nav.classList.toggle('active'); }); </script>
